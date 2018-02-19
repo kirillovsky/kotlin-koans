@@ -29,5 +29,8 @@ fun Set<Char>.partitionLettersAndOtherSymbols(): Pair<Set<Char>, Set<Char>> {
 
 fun <T, C : MutableCollection<T>>
         Collection<T>.partitionTo(leftPart: C, rightPart: C, predicate: (T) -> Boolean): Pair<C, C> {
-    return filter(predicate).toCollection(leftPart) to filterNot(predicate).toCollection(rightPart)
+    forEach{
+        if (predicate.invoke(it)) leftPart.add(it) else rightPart.add(it)
+    }
+    return Pair(leftPart, rightPart)
 }
